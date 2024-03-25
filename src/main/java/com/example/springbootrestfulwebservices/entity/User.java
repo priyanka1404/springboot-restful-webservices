@@ -31,7 +31,7 @@ public class User {
     among this identity internally  uses  auto increament features to  increament the primary key  */
    
    
-    private long id;
+    private Long id;
 
     @Column( nullable = false)// to customize the coulmn,to make it this should be  not null
     private String firstName;  /* jpa will automatically  create the coulmn name in db as first_name when it combined with two words
