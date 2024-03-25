@@ -1,11 +1,11 @@
 package com.example.springbootrestfulwebservices.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Repository;
 
 import com.example.springbootrestfulwebservices.entity.User;
 
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 
 //to perform crud operations on user 
 /*JPA repository is an generic interface  it is from springframework 
