@@ -1,4 +1,4 @@
-package com.example.springbootrestfulwebservices.contoller;
+package com.example.springbootrestfulwebservices.controller;
 
 
 import org.springframework.http.HttpStatus;
