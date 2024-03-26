@@ -7,5 +7,6 @@ public interface UserService {
         //create a  createUser method, return type is User
 
 
-        User creatUser(User user); // pass the entity as 
+        User creatUser(User user); // pass the entity as  argument
+        User getUserById(Long userId);
  }
