@@ -14,6 +14,12 @@ postmapping  rest api methods to create user and store in db and how the saved u
 <img width="1029" alt="Screenshot 2024-03-26 at 12 59 05 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/f06a652c-7e4e-41e6-a8ca-a0f0701364e8">
 <img width="1224" alt="Screenshot 2024-03-26 at 12 58 42 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/8e8b10d4-e0ab-4246-a67a-88bb52c13a57">
 
+//@deletemapping
+<img width="1157" alt="Screenshot 2024-03-26 at 1 34 40 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/0ead5f90-1d3a-4e92-ad0e-2d90670a0257">
+<img width="1028" alt="Screenshot 2024-03-26 at 1 35 05 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/40a9f6d6-5f12-4cc2-a3dd-59c9b0a0a03e">
+
+
+
 
 
 
