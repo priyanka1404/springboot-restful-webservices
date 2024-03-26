@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -81,4 +83,22 @@ public ResponseEntity<List<User>> getAllUsers(){
                        
 }
 
+// build update user  in Rest API
+
+@PutMapping("{id}")
+
+public ResponseEntity<User> updateUser( @PathVariable("id") Long userId,@RequestBody User user){
+    //pathvariable to bi
+
+    //it will update the user info in db and return  updatedUser  
+
+    user.setId(userId);
+    //we are using this userid in update user method
+    User updatedUser=  userService.updatUser(user);
+
+    return  new ResponseEntity<>(updatedUser,HttpStatus.OK);
+
+
+    
+}
 }

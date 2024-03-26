@@ -44,5 +44,23 @@ public class UserServiceImpl  implements UserService {
         
         return  userRepository.findAll();
     }
+
+    @Override
+    public User updatUser(User user) {//  user object as a method argument
+
+        //this user object contain all the updated information sent by the client 
+        
+        
+        User  existingUser= userRepository.findById(user.getId()).get();
+        // we got the exsisting user object from db and  
+        //we will update this existing user and will save back to db 
+
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        User updatedUser=userRepository.save(existingUser);
+        return  updatedUser;
+       
+    }
     
 } 
