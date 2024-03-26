@@ -1,6 +1,6 @@
 package com.example.springbootrestfulwebservices.controller;
 
-
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,5 +67,18 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
 
     }
+
+
+    // build findAllUsers in Rest API
+//http:localhost:8080/api/users
+@GetMapping
+public ResponseEntity<List<User>> getAllUsers(){
+      List<User> users= userService.getAllUsers();
+    
+    
+    return new ResponseEntity<>(users,HttpStatus.OK);
+                         
+                       
+}
 
 }

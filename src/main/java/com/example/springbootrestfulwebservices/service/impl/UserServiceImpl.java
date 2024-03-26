@@ -1,5 +1,6 @@
 package com.example.springbootrestfulwebservices.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +36,13 @@ public class UserServiceImpl  implements UserService {
        
     return optionalUser.get(); // it retrieves user object by id 
         
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        
+        return  userRepository.findAll();
     }
     
 } 
