@@ -18,6 +18,18 @@ postmapping  rest api methods to create user and store in db and how the saved u
 <img width="1157" alt="Screenshot 2024-03-26 at 1 34 40 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/0ead5f90-1d3a-4e92-ad0e-2d90670a0257">
 <img width="1028" alt="Screenshot 2024-03-26 at 1 35 05 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/40a9f6d6-5f12-4cc2-a3dd-59c9b0a0a03e">
 
+#DTO CHANGES
+//@POST MAPPING
+<img width="1029" alt="Screenshot 2024-03-27 at 5 01 06 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/761bc893-5e82-48b6-8b98-90df67eceec8">
+
+<img width="1156" alt="Screenshot 2024-03-27 at 5 00 52 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/f20eb7d3-198b-405d-9f2d-69cec041f41b">
+
+
+
+
+
+
+
 
 
 
