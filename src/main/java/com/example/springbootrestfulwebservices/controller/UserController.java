@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
 import com.example.springbootrestfulwebservices.service.UserService;
 
@@ -38,6 +39,7 @@ public class UserController {
     */
     private UserService userService;
     
+   
     //build create user REST API
 
 @PostMapping  // to make method as restapi we are using spring annotation
@@ -107,5 +109,33 @@ public ResponseEntity<String>deleteUser(@PathVariable("id") Long userId){
     userService.deleteUser(userId);
     return new ResponseEntity<>("user successfully deleted",HttpStatus.OK);
 }
+
+
+
+
+
+
+
+
+
+                           /******* USER DTO  **********/
+@PostMapping("/dto")
+//http://localhost:8080/api/users/dto
+public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
+
+
+    //@Requestbody:it will convert json to java object,internally it uses http msg converters .
+       
+       UserDto savedUser = userService.creatUser(userDto);
+       /* this createUser internally save the user object in database and 
+       returns the saved user object that we are stored in  user object */
+
+    return  new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+
+    /* here we are returing the stored object and http status  to client  */
+
+    }
+
+
 
 }

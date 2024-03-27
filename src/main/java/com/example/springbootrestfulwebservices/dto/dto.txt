@@ -1,0 +1,22 @@
+Data transfer object is a pattern
+which  used to transfer data between client and sserver
+client<---------------------------------------------------------DTo------------------------>server
+|                                                                                             |
+|                                                                                             |
+v                                                                                            v
+creates dto object and send through http request.               server eill extarct dto objetcs and  and sends the http response.
+
+//we will create the dto class ,which holds the objects of all entitys 
+
+for example: employe management system
+it contains organization entitys,department entity, employee entity 
+// instead of calling them separetly ,we will use DTO which hold all these three entitys objects together
+
+advantages:
+ 
+> to reduce the number of remote calls
+> server can use DTO to tansfer only required amount of data
+> if we ues JPA instead of DTO,IT CANT HANDLE SECURITY INFO
+
+JPA is used to store and retrive data wrspct to db
+

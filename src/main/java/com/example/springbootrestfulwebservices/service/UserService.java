@@ -2,6 +2,7 @@ package com.example.springbootrestfulwebservices.service;
 
 import java.util.List;
 
+import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
 
 public interface UserService {
@@ -15,5 +16,12 @@ public interface UserService {
         List<User> getAllUsers();
         User updatUser(User user);
         void deleteUser(Long userId);
+
+
+
+
+
+        /******** UserDTO ********/
+        UserDto creatUser(UserDto userDto);// we have changed return type and method argument to userDTO 
 
  }
