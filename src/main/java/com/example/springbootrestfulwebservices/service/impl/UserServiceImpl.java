@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
+import com.example.springbootrestfulwebservices.mapper.UserMapper;
 import com.example.springbootrestfulwebservices.repository.UserRepository;
 import com.example.springbootrestfulwebservices.service.UserService;
 
@@ -81,20 +82,30 @@ public class UserServiceImpl  implements UserService {
         * so here we need to convert userdto to userjpa  entity  object
         */
         
+     // INSTEAD OF WRITING THIS LOGIC FOR EVERY MAPPING WE ARE GOING TO USE <MAPPER CLASS> WHERE IT HOLD CONVERSION LOGIC METHODS
         //convert userDTO to JPA entity object
-            User user1 =new User(userDto.getId(),
+         /* ----------- User user1 =new User(userDto.getId(),
                                  userDto.getFirstName(),
                                  userDto.getLastName(),
-                                 userDto.getEmail());  
-// we need to save user jpa entity  object into db by using save method
-                User savedUser =  userRepository.save(user1);
+                                 userDto.getEmail());  ----------------------*/
+//mapper  class method
+  User user = UserMapper.mapToUser(userDto);
 
+// we need to save user jpa entity  object into db by using save method
+                
+          /*--------User savedUser =  userRepository.save(user1);--------*/
+          User savedUser = userRepository.save(user);
                 // convert jpa entity into userDto
                 //restapi will expect saved user in response it contains primary key
-                UserDto savedUserDto =  new UserDto(savedUser.getId(),
+                /*---------------UserDto savedUserDto =  new UserDto(savedUser.getId(),
                                                     savedUser.getFirstName(),
                                                     savedUser.getLastName(),
-                                                    savedUser.getEmail());
+                                                    savedUser.getEmail());-----------------*/
+
+
+         // mapper class method
+         UserDto savedUserDto = UserMapper.mapToUserDto(savedUser);
+         
         return  savedUserDto;
         
     }
