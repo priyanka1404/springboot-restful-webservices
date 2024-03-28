@@ -109,4 +109,19 @@ public class UserServiceImpl  implements UserService {
         return  savedUserDto;
         
     }
+
+    @Override
+    public UserDto getUserByIdDto(Long userId) {
+
+        Optional<User> optionalUser=userRepository.findById(userId);
+       
+        User user = optionalUser.get(); // it retrieves user object by id 
+    return UserMapper.mapToUserDto(user);
+        
+    }
+
+
+
+
+
 } 
