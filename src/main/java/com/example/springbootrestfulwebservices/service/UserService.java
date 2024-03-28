@@ -24,4 +24,5 @@ public interface UserService {
         /******** UserDTO ********/
         UserDto creatUser(UserDto userDto);// we have changed return type and method argument to userDTO 
         UserDto getUserByIdDto(Long userId);
+        List<UserDto> getAllUsersDto();
  }

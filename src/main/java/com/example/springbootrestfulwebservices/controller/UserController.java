@@ -147,5 +147,19 @@ public ResponseEntity<UserDto> getUserByIdDto( @PathVariable("id") Long userId){
 
 }
 
+ // build findAllUsers in Rest API
+//http:localhost:8080/api/users/dto
+@GetMapping("/dto")
+public ResponseEntity<List<UserDto>> getAllUsersDto(){
+      List<UserDto> users= userService.getAllUsersDto();
+    
+    
+    return new ResponseEntity<>(users,HttpStatus.OK);
+                         
+                       
+}
+
+
+
 
 }
