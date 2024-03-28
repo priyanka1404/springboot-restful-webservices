@@ -129,6 +129,23 @@ public class UserServiceImpl  implements UserService {
         // to convert  jpa to dto
     }
 
+    @Override
+    public UserDto updatUserDto(UserDto userDto) {//  user object as a method argument
 
+        //this user object contain all the updated information sent by the client 
+        
+        
+        User  existingUser= userRepository.findById(userDto.getId()).get();
+        // we got the exsisting user object from db and  
+        //we will update this existing user and will save back to db 
+
+        existingUser.setFirstName(userDto.getFirstName());
+        existingUser.setLastName(userDto.getLastName());
+        existingUser.setEmail(userDto.getEmail());
+        User updatedUser=userRepository.save(existingUser);
+
+        return  UserMapper.mapToUserDto(updatedUser);
+       
+    }
 
 } 

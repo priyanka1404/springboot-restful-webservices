@@ -159,7 +159,25 @@ public ResponseEntity<List<UserDto>> getAllUsersDto(){
                        
 }
 
+// build update user  in Rest API
 
+@PutMapping("/dto/{id}")
+
+public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId,@RequestBody UserDto userDto){
+    //pathvariable to bi
+
+    //it will update the user info in db and return  updatedUser  
+
+    userDto.setId(userId);
+    //we are using this userid in update user method
+    UserDto  updatedUser=  userService.updatUserDto(userDto);
+
+    return  new ResponseEntity<>(updatedUser,HttpStatus.OK);
+
+    
+}
+
+//need to push  git
 
 
 }
