@@ -1,0 +1,16 @@
+to convert jpa to dto object and vice versa ,we are using two static methods(UserMapper.java)
+ it is not good suggestion to use these static methods when we have more number of  entities
+ here we are using model mapper library  or mapstruct library to convert jpa ->dto and vice versa
+
+
+# model mapper  library
+
+spring boot follow three layer architecture
+                                            ____________________________
+postman---|dto|-->controller------>service->|jpa <-->dto                 |->repository-> db
+                                            ----------------------------
+
+//Development steps
+1) Add ModelMapper maven dependency
+2)configure ModelMapper class as spring bean
+3)inject use ModelMapper spring bean in service class
