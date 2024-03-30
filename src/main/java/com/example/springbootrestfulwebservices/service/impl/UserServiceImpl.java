@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
+import com.example.springbootrestfulwebservices.mapper.AutoUserMapper;
 //import com.example.springbootrestfulwebservices.mapper.UserMapper;
 import com.example.springbootrestfulwebservices.repository.UserRepository;
 import com.example.springbootrestfulwebservices.service.UserService;
@@ -27,6 +28,7 @@ public class UserServiceImpl  implements UserService {
     */
     private  UserRepository userRepository;
     private ModelMapper modelMapper;
+
 
     @Override
     public User creatUser(User user) {  // rest api controller will call createUser method
@@ -96,7 +98,12 @@ public UserDto creatUser(UserDto userDto) {
 /*-- User user = UserMapper.mapToUser(userDto);--*/
 
 // 3) model mapper 
-User user = modelMapper.map(userDto,User.class);
+/*---User user = modelMapper.map(userDto,User.class);--*/
+
+//map struct 
+User user = AutoUserMapper.MAPPER.mapToUser(userDto);
+
+
 
 
 // we need to save user jpa entity  object into db by using save method
@@ -117,7 +124,11 @@ User user = modelMapper.map(userDto,User.class);
      
      // 3) model mapper 
 
-     UserDto savedUserDto = modelMapper.map(savedUser, UserDto.class);
+     /*--UserDto savedUserDto = modelMapper.map(savedUser, UserDto.class);--*/
+
+     //4 map struct 
+     UserDto savedUserDto = AutoUserMapper.MAPPER.mapToUserDto(savedUser);
+       
      
     return  savedUserDto;
     
@@ -130,8 +141,11 @@ public UserDto getUserByIdDto(Long userId) {
    
     User user = optionalUser.get(); // it retrieves user object by id 
 /****------2) return UserMapper.mapToUserDto(user);-------*******/
-  return modelMapper.map(user, UserDto.class);
-    
+  /***---MODELMAPPER---3)return modelMapper.map(user, UserDto.class);---*/
+  
+  // 4) map struct
+  return AutoUserMapper.MAPPER.mapToUserDto(optionalUser.get());
+ 
 }
 
 @Override
@@ -141,8 +155,10 @@ public List<UserDto> getAllUsersDto() {
    /****------2) return  users.stream().map(UserMapper::mapToUserDto).collect(Collectors.toList()); ****/
 
    //3)model mapper
-   return  users.stream().map((user)->modelMapper.map(user,UserDto.class)).collect(Collectors.toList());
+   //return  users.stream().map((user)->modelMapper.map(user,UserDto.class)).collect(Collectors.toList());
 
+   // 4)map struct
+   return  users.stream().map((user)->AutoUserMapper.MAPPER.mapToUserDto(user)).collect(Collectors.toList());
 
     // to convert  jpa to dto
 }
@@ -165,7 +181,11 @@ public UserDto updatUserDto(UserDto userDto) {//  user object as a method argume
     /****--2)---return  UserMapper.mapToUserDto(updatedUser);-----*/
 
     //3)modelmapper
-    return  modelMapper.map(updatedUser ,UserDto.class);
+   // return  modelMapper.map(updatedUser ,UserDto.class);
+
+   //4)mapstruct
+       return AutoUserMapper.MAPPER.mapToUserDto(updatedUser);
+   //
    
 }
 

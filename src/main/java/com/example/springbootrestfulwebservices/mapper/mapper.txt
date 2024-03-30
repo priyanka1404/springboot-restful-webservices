@@ -14,3 +14,25 @@ postman---|dto|-->controller------>service->|jpa <-->dto                 |->repo
 1) Add ModelMapper maven dependency
 2)configure ModelMapper class as spring bean
 3)inject use ModelMapper spring bean in service class
+
+
+// map struct library 
+//development steps 
+
+1)add map struct maven dependency
+2)create UserMapper using mapstruct
+3)User UserMapper in Userserviceimpl class
+
+
+1)we need to add map struct dependency from official site
+and properties
+
+2)map struct processor pligin -> compiler plugin and map struct processor 
+inorder to support lombook libaray with map struct 
+
+add plugins 
+1)mapstruct processor
+2)lombook
+3)lombook -mapstruct-binding
+
+
