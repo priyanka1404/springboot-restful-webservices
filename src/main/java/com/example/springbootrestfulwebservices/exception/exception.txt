@@ -18,3 +18,14 @@ postman<-----(restApi calls)----->controller<------>service-- (throws  resource 
 
 -> initially  by default it shows 500  internal server error
 ->after the code changes  of resource not found exception it shows 404 ,not found error
+
+//specific exception handling output 
+-------------------------------------
+{
+    "timeStamp": "2024-03-31T18:49:43.710468",
+    "message": "User not found with id:'9'",
+    "path": "uri=/api/users/dto/9",
+    "errorCode": "User _not_found"
+}
+
+-----------------------------------------

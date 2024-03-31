@@ -1,17 +1,22 @@
 package com.example.springbootrestfulwebservices.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
+import com.example.springbootrestfulwebservices.exception.ErrorDetails;
+import com.example.springbootrestfulwebservices.exception.ResourceNotFoundException;
 import com.example.springbootrestfulwebservices.service.UserService;
 
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -177,7 +182,27 @@ public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId,@R
     
 }
 
+// to handle specific exception
 
+@ExceptionHandler(ResourceNotFoundException.class)// we need to pass the exception we are going to handle 
+public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest){
+   
+    /*we need to pass two arguments to this method 
+    * 1)type of exception
+    *2) web request( WE NEED SOME DETAILS FROM WEB REQUEST )
+    */
+
+ /* we need to create the instance of error details */
+
+ ErrorDetails errorDetails = new ErrorDetails(
+LocalDateTime.now(),
+exception.getMessage(),
+webRequest.getDescription(false),"User _not_found");
+
+//if we pass true ,it will fetch client info 
+
+    return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);  
+}
 
 
 }
