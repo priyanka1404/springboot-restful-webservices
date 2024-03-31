@@ -1,7 +1,7 @@
 package com.example.springbootrestfulwebservices.mapper;
 
 import org.mapstruct.Mapper;
-//import org.mapstruct.Mapping;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
@@ -23,7 +23,7 @@ public interface AutoUserMapper {
     // no need to write code to implement these methods
 
 
-    // inorder to map one object to another objects both fields same field name
+    // inorder to map one object to another objects both fields should have same field name
     //if both are not same we can use map struct(@mapping) annotation
 /*example 
    * @Mapping(source="email",target="emailAddress")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
+import com.example.springbootrestfulwebservices.exception.ResourceNotFoundException;
 import com.example.springbootrestfulwebservices.mapper.AutoUserMapper;
 //import com.example.springbootrestfulwebservices.mapper.UserMapper;
 import com.example.springbootrestfulwebservices.repository.UserRepository;
@@ -27,7 +28,7 @@ public class UserServiceImpl  implements UserService {
     * because if a spring bean(class) it has single paramaterized constructor we can omit autowired annotation
     */
     private  UserRepository userRepository;
-    private ModelMapper modelMapper;
+    //private ModelMapper modelMapper;
 
 
     @Override
@@ -71,7 +72,16 @@ public class UserServiceImpl  implements UserService {
     }
 
     @Override
+
+    // to handle exception for delete user 
     public void deleteUser(Long userId) {
+        User  existingUser= userRepository.findById(userId).orElseThrow(
+            ()->new ResourceNotFoundException("User", "id", userId)
+        ); 
+
+        // if the user not found in db,it will throw resource not found exception
+        // springboot default error handler   will handle the this exception and it wii return respons to client 
+
           userRepository.deleteById(userId);
         
     
@@ -79,6 +89,8 @@ public class UserServiceImpl  implements UserService {
 
               /****************USER DTO*************/
 /**********REFACTORING THE  methods to use MODEL Mapper  class   ********/
+/**  REFACTORING THE  methods to use map struct **/
+/************* Refactoring to handle exceptions  ************************/ 
 
 
 @Override
@@ -137,14 +149,19 @@ User user = AutoUserMapper.MAPPER.mapToUser(userDto);
 @Override
 public UserDto getUserByIdDto(Long userId) {
 
-    Optional<User> optionalUser=userRepository.findById(userId);
+   // Optional<User> optionalUser=userRepository.findById(userId);//commenting map struct code  to handle exceptions
+
+   User user=userRepository.findById(userId).orElseThrow(
+    ()-> new  ResourceNotFoundException("User", "id", userId)
+   );
+
    
-    User user = optionalUser.get(); // it retrieves user object by id 
+  //  User user = optionalUser.get(); // it retrieves user object by id ->map struct code
 /****------2) return UserMapper.mapToUserDto(user);-------*******/
   /***---MODELMAPPER---3)return modelMapper.map(user, UserDto.class);---*/
   
   // 4) map struct
-  return AutoUserMapper.MAPPER.mapToUserDto(optionalUser.get());
+  return AutoUserMapper.MAPPER.mapToUserDto(user);
  
 }
 
@@ -169,7 +186,11 @@ public UserDto updatUserDto(UserDto userDto) {//  user object as a method argume
     //this user object contain all the updated information sent by the client 
     
     
-    User  existingUser= userRepository.findById(userDto.getId()).get();
+    //User  existingUser= userRepository.findById(userDto.getId()).get();  //commenting map struct code  to handle exceptions
+    
+    User  existingUser= userRepository.findById(userDto.getId()).orElseThrow(
+        ()->new ResourceNotFoundException("User", "id", userDto.getId())
+    ); 
     // we got the exsisting user object from db and  
     //we will update this existing user and will save back to db 
 
@@ -188,6 +209,8 @@ public UserDto updatUserDto(UserDto userDto) {//  user object as a method argume
    //
    
 }
+ 
+
 
 
 } 

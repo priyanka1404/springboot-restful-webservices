@@ -1,0 +1,20 @@
+
+Development steps
+1)create and use ResourceNotFoundException custom Exception
+2)Create error details class to hold  of the custom error response 
+3)Create Global Exception Handler class to handle specific and global exceptions
+
+
+postman<-----restApi calls----->controller<------>service-- throws  exception---->spring boot default error handling-----response---->postman
+
+
+->default response will be in json format
+->but client expect customized response 
+-> for that we need to follow above mentioned development steps 
+
+
+postman<-----(restApi calls)----->controller<------>service-- (throws  resource not found  exception)---->Global Exception Handler( this class handles exception specific  and global exception in a single place)--response---->postman
+
+
+-> initially  by default it shows 500  internal server error
+->after the code changes  of resource not found exception it shows 404 ,not found error

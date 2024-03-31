@@ -137,7 +137,7 @@ public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
     }
 
  // build getUserById in Rest API
-//http:localhost:8080/api/users/1
+//http:localhost:8080/api/users/dto/1
 @GetMapping("/dto/{id}")  // it maps incomming http request to this method 
 public ResponseEntity<UserDto> getUserByIdDto( @PathVariable("id") Long userId){
  // @PathVariable to bind the url template  with method argument 
