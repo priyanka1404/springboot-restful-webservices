@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.stereotype.Repository;
 
 import com.example.springbootrestfulwebservices.entity.User;
+import java.util.List;
+import java.util.Optional;
+
 
 //import jakarta.transaction.Transactional;
 
@@ -29,5 +32,9 @@ JpaRepository interface .
 //@Repository
 //@Transactional
 public interface UserRepository  extends JpaRepository<User,Long>{
+
+// we need to write  spring data custom query method  to retrieve user by email id
+
+Optional<User>  findByEmail(String email);
 
 }

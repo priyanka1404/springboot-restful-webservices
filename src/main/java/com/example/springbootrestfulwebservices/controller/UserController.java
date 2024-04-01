@@ -184,8 +184,8 @@ public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId,@R
 
 // to handle specific exception
 
-@ExceptionHandler(ResourceNotFoundException.class)// we need to pass the exception we are going to handle 
-public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest){
+//@ExceptionHandler(ResourceNotFoundException.class)// we need to pass the exception we are going to handle specific exception
+//public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest webRequest){
    
     /*we need to pass two arguments to this method 
     * 1)type of exception
@@ -194,15 +194,15 @@ public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotF
 
  /* we need to create the instance of error details */
 
- ErrorDetails errorDetails = new ErrorDetails(
-LocalDateTime.now(),
-exception.getMessage(),
-webRequest.getDescription(false),"User _not_found");
+ //ErrorDetails errorDetails = new ErrorDetails(
+//LocalDateTime.now(),
+//exception.getMessage(),
+//webRequest.getDescription(false),"User _not_found");
 
 //if we pass true ,it will fetch client info 
 
-    return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);  
-}
+  //  return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
+//}
 
 
 }

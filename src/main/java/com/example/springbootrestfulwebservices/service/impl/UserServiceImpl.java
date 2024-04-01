@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springbootrestfulwebservices.dto.UserDto;
 import com.example.springbootrestfulwebservices.entity.User;
+import com.example.springbootrestfulwebservices.exception.EmailAlreadyExistsException;
 import com.example.springbootrestfulwebservices.exception.ResourceNotFoundException;
 import com.example.springbootrestfulwebservices.mapper.AutoUserMapper;
 //import com.example.springbootrestfulwebservices.mapper.UserMapper;
@@ -112,6 +113,15 @@ public UserDto creatUser(UserDto userDto) {
 // 3) model mapper 
 /*---User user = modelMapper.map(userDto,User.class);--*/
 
+
+
+Optional<User> optionalUser =  userRepository.findByEmail(userDto.getEmail());// using custom query method from userrepository
+
+// to whether given email is already present are not
+
+if(optionalUser.isPresent()){
+    throw new EmailAlreadyExistsException("email already exist for a user ");
+} // we are handling this  specific exception in global exception
 //map struct 
 User user = AutoUserMapper.MAPPER.mapToUser(userDto);
 

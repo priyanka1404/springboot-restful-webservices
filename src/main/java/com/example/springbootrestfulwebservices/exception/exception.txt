@@ -29,3 +29,28 @@ postman<-----(restApi calls)----->controller<------>service-- (throws  resource 
 }
 
 -----------------------------------------
+
+
+// to handle specific exception like email already exists
+// create a class with  response status for emailexistsexception
+// create custom query method in user repository
+//userserviceimpl->did some modifications in create user  logic  to throw exception  if email exists
+//handle this  specific exception logic in global exception class 
+
+
+// output 
+{
+    "timeStamp": "2024-04-01T08:57:54.011139",
+    "message": "email already exist for a user ",
+    "path": "uri=/api/users/dto",
+    "errorCode": "User_Email _Already_Exists"
+}
+
+
+// global exception output,when we are creating user without body
+{
+    "timeStamp": "2024-04-01T09:20:46.286397",
+    "message": "Required request body is missing: public org.springframework.http.ResponseEntity<com.example.springbootrestfulwebservices.dto.UserDto> com.example.springbootrestfulwebservices.controller.UserController.createUser(com.example.springbootrestfulwebservices.dto.UserDto)",
+    "path": "uri=/api/users/dto",
+    "errorCode": "Internal_Server_Error"
+}
