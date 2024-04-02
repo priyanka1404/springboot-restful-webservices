@@ -67,6 +67,13 @@
 <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 
+<!-- Adding springboot actuator dependency 
+ it will provide bunch of http end points to monitor the application -->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
 
 	</dependencies>
 
