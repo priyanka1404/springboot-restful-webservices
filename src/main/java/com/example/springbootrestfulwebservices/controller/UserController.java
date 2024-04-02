@@ -13,6 +13,7 @@ import com.example.springbootrestfulwebservices.exception.ErrorDetails;
 import com.example.springbootrestfulwebservices.exception.ResourceNotFoundException;
 import com.example.springbootrestfulwebservices.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -126,8 +127,9 @@ public ResponseEntity<String>deleteUser(@PathVariable("id") Long userId){
                            /******* USER DTO  **********/
 @PostMapping("/dto")
 //http://localhost:8080/api/users/dto
-public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
-
+public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
+  // #validation:create user rest api takes userdto as a  request  object,we need to  add java bean validation annotation
+ // adding @valid annotation to enable validation for userdto class
 
     //@Requestbody:it will convert json to java object,internally it uses http msg converters .
        
@@ -168,8 +170,12 @@ public ResponseEntity<List<UserDto>> getAllUsersDto(){
 
 @PutMapping("/dto/{id}")
 
-public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId,@RequestBody UserDto userDto){
-    //pathvariable to bi
+public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId, @Valid @RequestBody UserDto userDto){
+    //pathvariable 
+
+    // adding @valid annotation to enable validation for userdto class
+    // #validation:update  user rest api takes userdto as a  request  object,we need to  add java bean validation annotation
+
 
     //it will update the user info in db and return  updatedUser  
 

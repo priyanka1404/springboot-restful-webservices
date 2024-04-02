@@ -1,0 +1,56 @@
+
+Java Bean validation API 
+Hibernate validator is the reference implemntation of java  api
+
+few bean valid annotations
+@NOTNULL
+@size
+@min 
+@max
+@email
+@NotEmpty
+@NotBlank
+
+# development steps
+1)Add validation dependency i n pom.xml 
+2)Add Validation Annotations to UserDto
+3)Enable Validation using @Valid Annotation on create and update Rest APIs
+
+# output if we insert the fields with empty 
+
+{
+    "timeStamp": "2024-04-01T18:14:51.740986",
+    "message": "Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.example.springbootrestfulwebservices.dto.UserDto> 
+    com.example.springbootrestfulwebservices.controller.UserController.createUser(com.example.springbootrestfulwebservices.dto.UserDto) with 3 errors: [Field error in object 'userDto' on field 'lastName': rejected value []; codes [NotEmpty.userDto.lastName,NotEmpty.lastName,NotEmpty.java.lang.String,NotEmpty];
+     arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDto.lastName,lastName]; arguments []; default message [lastName]]; default message [must not be empty]] [Field error in object 'userDto' on field 'firstName': rejected value []; codes [NotEmpty.userDto.firstName,NotEmpty.firstName,NotEmpty.java.lang.String,NotEmpty]; 
+     arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDto.firstName,firstName]; arguments []; default message [firstName]]; default message [must not be empty]] [Field error in object 'userDto' on field 'email': rejected value []; codes [NotEmpty.userDto.email,NotEmpty.email,NotEmpty.java.lang.String,NotEmpty]; 
+     arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDto.email,email]; arguments []; default message [email]]; default message [must not be empty]] ",
+    "path": "uri=/api/users/dto",
+    "errorCode": "Internal_Server_Error"
+}
+
+// we cannot send this kind of message 
+//we need to provide valid respons eto client 
+
+4)Customize validation Error Response and send back to client 
+
+->In global exception class , inorder to customise validation error response  we need to extends ResponseEntityExceptionHandler
+-> search for handleMethodArgumentNotValid 
+-> this method can be used to customize the validation errors
+->we need to override this method in global exception handler  class and we need to provide implementation
+
+// output{
+    "firstName": "must not be empty",
+    "lastName": "must not be empty",
+    "email": "must not be empty"
+}
+
+// we can customize validation error messages in dto class(userDto)
+
+
+output 
+{
+    "lastName": "user lastName should not be null or empty ",
+    "firstName": "user firstName should not be null or empty ",
+    "email": "user email should not be null or empty "
+}

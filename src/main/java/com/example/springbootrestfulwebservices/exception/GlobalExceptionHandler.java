@@ -1,16 +1,27 @@
 package com.example.springbootrestfulwebservices.exception;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice  // to handle exception globally 
 /* here we will ahndle specific exception and global exception in single place  */
-public class GlobalExceptionHandler {
+// inorder to customise validation error response  we need to extends ResponseEntityExceptionHandler
+public class GlobalExceptionHandler  extends ResponseEntityExceptionHandler{
     
 
 // to handl specific  exception in  global exception
@@ -72,7 +83,7 @@ webRequest.getDescription(false),"User_Email _Already_Exists");
 // global exception handler 
 
 @ExceptionHandler(Exception.class)// we need to pass the exception we are going to handle specific exception
-public ResponseEntity<ErrorDetails> handleException(Exception exception, WebRequest webRequest){
+public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest){
    
     /*we need to pass two arguments to this method 
     * 1)type of exception
@@ -93,5 +104,43 @@ webRequest.getDescription(false),"Internal_Server_Error");
 
 
 
+
+//-> this method can be used to customize the validation errors
+//we need to override this method in global exception handler  class and we need to provide implementation
+
+
+@Override
+protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                             HttpHeaders headers, 
+                                                            HttpStatusCode status,
+                                                           WebRequest request) {
+
+             // to store multiple error message in object and will send this object  back to client 
+             //to store multiple error messages  we are using map
+
+           Map <String ,String> errors= new HashMap<>();
+            List<ObjectError> errorList = ex.getBindingResult().getAllErrors();
+
+             // to get field and  message from this list ,we are using for-each method for iteration
+
+            errorList.forEach((error)->{// we are passing error object,(lambda  expression)
+                      String fieldName =((FieldError) error).getField();
+                         // we are provide casting for error  object  to get getfield method 
+
+                         // to get corresponding validation error message
+                     String message= error.getDefaultMessage();
+
+                         //we need to add this two values to the map 1)fieldName 2)message
+
+                         errors.put(fieldName,message);
+                                                             });
+
+                //we stored all the validaton error msgs in this map and we are returing this map  to client
+
+            return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
+    
+
+            
+}
 
 }
