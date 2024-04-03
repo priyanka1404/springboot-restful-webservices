@@ -32,10 +32,72 @@ response->
 {"status":"UP","details":{"total":245107195904,"free":175602343936,"threshold":10485760,
 "path":"/Users/priyankareddynomula/Desktop/springboot-restful-webservices/.","exists":true}},"ping":{"status":"UP"}}}
 
+# 3) #https://localhost:8080/actuator/beans
+#/bean end point 
+# the / bean end point shows all the beans registered in your application,including the beans you explicitely configured
+ and those are auto configured 
+ 
+4) #https://localhost:8080/actuator/conditions 
+
+ #/conditions end point  shows the  auto configuration report ,categorized into  positive matches and negative matches 
+   positive matches->All the spring autoconfigurations beans matched with @conditional annotations
+   whenever it find jar dependencies in class path
+
+    Negative matches:All the spring autoconfigurations beans  not matched with @conditional annotations
+
+4) #https://localhost:8080/actuator/mappings 
+
+-> it will show all the @requestmapping annotations declared in the application 
+-> this is very helpful for checking which request path will be handled by which controller method 
+->mappings usually present in dispatcher servlet 
+
+5) #https://localhost:8080/actuator/configprops
+-> it offers all the   configuration properties defined by @configuration properties bean ,including your 
+configuration properties  defined in the application.application.properties or YAML files
+
+6)#https://localhost:8080/actuator/metrics
+-> the metric end point shows various metrics about the current application such as how much memory it is using 
+,how much memory is free,the size of the heap used ,the number of threads used ,and so on 
+
+->it will display all meters
+if we need more detailed information about specific  metric  in list 
+eg: # http://localhost:8080/actuator/metrics/disk.total
+
+7)#https://localhost:8080/actuator/env
+-> env endpoint exposes all the properties from the Springs configurable environment interface ,such as a list 
+ of active profiles,application properties,system environment variables and so on.
+
+8)#https://localhost:8080/actuator/threaddump
+-> we can view application's thread  dumb  with running threads details and JVM stack trace 
+
+9)#https://localhost:8080/actuator/loggers
+->it allows you to view and configure the log levels of your application at runtime 
+
+->we can view the logging level of specific loggers
+ post : https://localhost:8080/actuator/loggers/(packagename)
+ packagename:springbootrestfulwebservices
+body 
+ {
+    "configuredLevel":"DEBUG "
+    
+}
+ 
+ 
+ 10)#https://localhost:8080/actuator/shutdown
+ ->gracefully to shutdown the spring boot application 
+ -> this end point is not enabled by default we need to enable  this endpoint by adding this property 
+ in application.properties file:
+
+ Management.endpoint.shutdown.enabled=true
+
+ after adding this property we need to send HTTP post request to endpoint 
 
 
+ # Exposing 14 endpoint(s) beneath base path '/actuator'
 
+select none in body
+ response ->
 
-
-
-
+ {
+    "message": "Shutting down, bye..."
+}
