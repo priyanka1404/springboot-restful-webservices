@@ -1,0 +1,41 @@
+#to enable the actuators  to monitor the application
+# this * will enable all actuator end points
+#Exposing 13 endpoint(s) beneath base path '/actuator'
+management.endpoints.web.exposure.include = *  
+
+#to view the response of info endpoint 
+management.info.env.enabled= true
+
+
+
+
+# if you added any information about the application in application .properties then we can view it using /info endpoint
+1)#http://localhost:8080/actuator/info
+
+info.app.name = Spring Boot Restful webservices
+info.app.description = Spring boot Restful Web services Demo
+info.app.version =1.0.0
+
+2)#http://localhost:8080/actuator/health
+by default dispalys status of the application
+
+response -> {"status":"UP"}
+
+-> to diplay the db info aswell ,we need to add some changes in application .properties
+# this property always shows the health endpoints
+->management.endpoint.health.show-details=always
+
+
+response->
+
+{"status":"UP","components":{"db":{"status":"UP","details":{"database":"MySQL","validationQuery":"isValid()"}},"diskSpace":
+{"status":"UP","details":{"total":245107195904,"free":175602343936,"threshold":10485760,
+"path":"/Users/priyankareddynomula/Desktop/springboot-restful-webservices/.","exists":true}},"ping":{"status":"UP"}}}
+
+
+
+
+
+
+
+
