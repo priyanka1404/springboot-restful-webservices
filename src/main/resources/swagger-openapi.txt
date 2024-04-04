@@ -1,0 +1,56 @@
+
+Development steps
+1)Adding Spring doc-open API maven dependency
+2)Defining General API information (Using Annotations)
+ need to be added in  main class 
+
+@OpenAPIDefinition(  //Defining General API information (Using Annotations)
+	info = @Info(
+		title = "Spring boot Rest API  documentation",
+		description= "Spring boot rest API documentation ",
+		version="v1.0",
+		contact=@Contact(
+			name = "priyanka",
+			email="priyankareddynomula111@gmail.com",
+			url="https://github.com/priyanka1404 " // we can provide our website information
+		),
+		license=@License(
+			name = "Apache2.0"
+			//url="http "
+		)
+	),
+	// external docs
+	externalDocs = @ExternalDocumentation(
+		   description =  "Spring Boot User Management Documentation"
+		   //url= " "
+	)
+)
+3)Customizing Swagger API Documentation with Annotation
+
+at UserController class:
+
+@Tag(  //Customizing Swagger API Documentation with Annotation
+    name = "crud rest api for user resource",
+    description =" CRUD REST API's -create user,update user,get user,get all users,delete user"
+)
+
+
+
+4)Customizing Swagger Models Documentation with Annotations
+
+at  controller methods
+@Operation(
+    summary = "create user Rest API",
+    description =" create user Rest API is used to save user in database"
+)
+
+@ApiResponse(
+    responseCode = "201",
+    description = "Http Status  201 CREATED" 
+)
+
+// at userdto class 
+// for class and all methods 
+@Schema(
+    description="userDto model information"
+)

@@ -13,6 +13,9 @@ import com.example.springbootrestfulwebservices.exception.ErrorDetails;
 import com.example.springbootrestfulwebservices.exception.ResourceNotFoundException;
 import com.example.springbootrestfulwebservices.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -33,6 +36,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 //@Controller
 //@ResponseBody
 // instead of these two annotations we can use RestController 
+
+
+// swagger rest api annotation
+@Tag(  //Customizing Swagger API Documentation with Annotation
+    name = "crud rest api for user resource",
+    description =" CRUD REST API's -create user,update user,get user,get all users,delete user"
+)
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/users")// base url for all methods in the class
@@ -109,6 +119,16 @@ public ResponseEntity<User> updateUser( @PathVariable("id") Long userId,@Request
 
     
 }
+
+@Operation(
+    summary = "Delete   user Rest API",
+    description =" Delete  user By  ID Rest API is used to delete particular  user from the  database"
+)
+
+@ApiResponse(
+    responseCode = "200",
+    description = "Http Status  200  successful" 
+)
 // build delete user in Rest API
 @DeleteMapping("{id}")
 public ResponseEntity<String>deleteUser(@PathVariable("id") Long userId){
@@ -125,6 +145,17 @@ public ResponseEntity<String>deleteUser(@PathVariable("id") Long userId){
 
 
                            /******* USER DTO  **********/
+
+
+@Operation(  // swagger rest api annotation
+    summary = "create user Rest API",
+    description =" create user Rest API is used to save user in database"
+)
+
+@ApiResponse(
+    responseCode = "201",
+    description = "Http Status  201 CREATED" 
+)
 @PostMapping("/dto")
 //http://localhost:8080/api/users/dto
 public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
@@ -145,7 +176,17 @@ public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto){
 
  // build getUserById in Rest API
 //http:localhost:8080/api/users/dto/1
-@GetMapping("/dto/{id}")  // it maps incomming http request to this method 
+
+@Operation(
+    summary = "Get  user Rest API",
+    description =" Get user By  ID Rest API is used to get single  user from  database"
+)
+
+@ApiResponse(
+    responseCode = "200",
+    description = "Http Status  200  successful" 
+)
+@GetMapping("/dto/{id}")  // it maps incoming http request to this method 
 public ResponseEntity<UserDto> getUserByIdDto( @PathVariable("id") Long userId){
  // @PathVariable to bind the url template  with method argument 
   UserDto userdto=userService.getUserByIdDto(userId);
@@ -156,6 +197,16 @@ public ResponseEntity<UserDto> getUserByIdDto( @PathVariable("id") Long userId){
 
  // build findAllUsers in Rest API
 //http:localhost:8080/api/users/dto
+
+@Operation(
+    summary = "Get all user Rest API",
+    description =" Get  all users from  Rest API is used to get single  user from  database"
+)
+
+@ApiResponse(
+    responseCode = "200",
+    description = "Http Status  200  successful" 
+)
 @GetMapping("/dto")
 public ResponseEntity<List<UserDto>> getAllUsersDto(){
       List<UserDto> users= userService.getAllUsersDto();
@@ -168,6 +219,15 @@ public ResponseEntity<List<UserDto>> getAllUsersDto(){
 
 // build update user  in Rest API
 
+@Operation( 
+    summary = "update   user Rest API",
+    description =" update  user By  ID Rest API is used to update particular user in   database"
+)
+
+@ApiResponse(
+    responseCode = "200",
+    description = "Http Status  200  successful" 
+)
 @PutMapping("/dto/{id}")
 
 public ResponseEntity<UserDto> updateUserDto( @PathVariable("id") Long userId, @Valid @RequestBody UserDto userDto){
