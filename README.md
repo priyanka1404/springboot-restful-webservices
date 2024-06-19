@@ -26,7 +26,8 @@ postmapping  rest api methods to create user and store in db and how the saved u
 
 
 #docker 
-docker network
+
+#docker network
 
 commands:
 
@@ -150,7 +151,7 @@ spring.profiles.active=docker
 ## # how to run the docker img in docker container
    1)docker images
    2) docker ps // to check running containers
-   3)docker run --network springboot-db-ntwork  --name springboot-db<img width="1369" alt="Screenshot 2024-06-19 at 5 28 42 PM" src="https://github.com/priyanka1404/springboot-restful-webservices/assets/71031840/a738643a-4f08-4b21-8f1a-d3ff39a15aaa">
+   3)docker run --network springboot-db-ntwork  --name springboot-db
 -container -p 8003:8080 -d springboot-restful-webservices
 
     -p //to map container port with   host port
